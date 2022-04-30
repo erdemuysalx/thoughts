@@ -13,7 +13,7 @@ In this article, finally, we will start to take a glance at ARM’s arithmetical
 
 The arm commands process data in the register. Therefore, the data must be transferred to the registers before arithmetic, logic, or other types of processing. This information is very important to us. The way to do this is to load data into registers by using load/store commands. ARM commands generally take three or two operands. To explain this with an example let’s check the syntax of Instructions:
 
-INS Operan1, Operand2, Operand3
+`INS Operan1, Operand2, Operand3`
 
 where:
 
@@ -24,9 +24,11 @@ where:
 
 Quick example;
 
+```
 _ADD(INS) r0(Operand1), r1(Operand2), r2(Operand3)  
 // This_ instructions _set is basically adds r1 and r2 registers and writes the results into the r0 register.  
 //!--> r0 = r1+r2;  (in C)_
+```
 
 Some ARM instructions may also take some prefixes and suffixes.
 
@@ -43,15 +45,19 @@ MOV(Move) and MVN(Move Not) instructions: These instructions are almost availabl
 **Syntax:**
 
 ```
-MOV{S}
+MOV{S}{cond} Rd, Operand2
+MOV{cond} Rd, #imm16
+MVN{S}{cond} Rd, Operand2
 ```
 
 **Examples:**
 
-_// We can assigned a register value as well as we can assign a constant number.  
+```
+// We can assigned a register value as well as we can assign a constant number.  
 MOV r0, r1    
 MOV r0, 5  
 MVN r0, r1  //_!--> _r0 =_ NOT(r1)
+```
 
 where:
 
@@ -78,7 +84,11 @@ _Note: Division with a constant number might not be supported by all ARM process
 **Syntax:**
 
 ```
-ADD{S}
+ADD{S}{cond} Register0, Register1, Register2
+ADD Register1, #imm16  //!-->(5)
+SUB{S}{cond} Register3, Register4, Register5
+MUL Register0, Register1, Register2
+SDIV Register3, Register4, Register5
 ```
 
 **Examples:**
@@ -91,13 +101,14 @@ Let’s write assembly instructions that perform the following operations.
 
 > c = d / e;
 
-//!--> result = (a + b) - (c + d);  
-ADD   r0, r2, r3  //!--> result = a + b;  (in C)  
-ADD   r1, r4, r5  //!--> temp= c + d;  (in C)  
+```
+//!--> result = (a + b) - (c + d);
+ADD   r0, r2, r3  //!--> result = a + b;  (in C)
+ADD   r1, r4, r5  //!--> temp= c + d;  (in C)
 SUB   r0, r0, r1  //!--> result = result - temp;  (in C)
-
-MUL r0, r2, r3    //!--> a = b \* c; (only 32 bits stored)  (in C)  
+MUL r0, r2, r3    //!--> a = b * c; (only 32 bits stored)  (in C)
 SDIV  r0, r2, r4  //!--> c = d / e; (signed divide)  (in C)
+```
 
 **Logic (Bitwise) instructions:** The ARM instruction set provides instructions such as AND, OR, XOR, and BIC, which sets, and clears the bits according to the need of the program. Usually, you find these as part of if-else, while statements in high-level languages.
 
@@ -111,19 +122,23 @@ SDIV  r0, r2, r4  //!--> c = d / e; (signed divide)  (in C)
 
 **Syntax:**
 
+```
 AND `_Register0_`, `_Register1_`, `_Register2_`  //!--> r0 = r1 & r2;  (in C)   
 ORR `_Register3_`, `_Register4_`, `_Register5_`  //!--> r3 = r4 | r5;  (in C)   
 EOR `_Register0_`, `_Register1_`, `_Register2_`  //!--> r0 = r1 ^ r2;  (in C)  
 BIC `_Register3_`, `_Register4_`, `_Register5_`  //!--> r3 = r4 & (!r5);  (in C)
+```
 
 **Examples:**
 
+```
 //!--> r0 = 01101001    
 //!--> r1 = 11000111  
 AND r3, r0, r1; r3  //!--> 01000001  
 ORR r3, r0, r1; r3  //!--> 11101111   
 EOR r3, r0, r1; r3  //!--> 10101110   
 BIC r3, r0, r1; r3  //!--> 00101000
+```
 
 #### Branch Control Instructions
 
@@ -131,9 +146,11 @@ These instructions change the flow of execution via jumping to another instructi
 
 **Barrel Shifter:** As we mentioned in our first articles, the ARM’s arithmetic logic unit has a 32-bit barrel shifter that is capable of shifting and rotating operations. In order to be able to do this, the value must be in the register Rm. Briefly, the results are pre-processed by the barrel shifter before being processed in ALU.
 
+```
 MOV r0, r0, LSL #1  // Multiply r0 by two  
 MOV r1, r1, LSR #2  // Divide r1 by four  
 MOV r2, r2, ASR #2  // Divide r2 by four(signed).
+```
 
 If you remember from digital electronic circuits, shifting a number 1 step left is equal to multiplying the number by 2. Shifting the number to 2 steps right means dividing the number by 4.
 

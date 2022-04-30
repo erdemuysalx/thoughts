@@ -89,36 +89,42 @@ Running instances of images called containers.
 
 #### Pulling an Image
 
+```
 docker pull nginx  
 docker images  # list the images on your machine  
 docker image ls  # list the images on your machine
+```
 
 #### Running a Container
 
+```
 docker run nginx:latest  # run the container  
 docker run — name given\_name nginx:latest  #give a name to container  
 docker container ls or docker ps  # list the running containers
+```
 
 #### Exposing Ports
 
 Since containers work in an isolated environment, most of the time, you might want to expose some ports in order to view or interact with your applications.
 
-`**-p**` flag manages the port relations of your Docker container. For example, the following command line exposes port 80 of the Docker container and maps it to localhost’s 8080 port:
+`-p` flag manages the port relations of your Docker container. For example, the following command line exposes port 80 of the Docker container and maps it to localhost’s 8080 port:
 
-docker run -d -p 8080:80 nginx:latest
+`docker run -d -p 8080:80 nginx:latest`
 
-We can also expose multiple ports for a single Docker container using more than one `**-p**` flag. See the following command line:
+We can also expose multiple ports for a single Docker container using more than one `-p` flag. See the following command line:
 
-docker run -d -p 3000:80 -p 8080:80 nginx:latest
+`docker run -d -p 3000:80 -p 8080:80 nginx:latest`
 
 #### Managing Containers
 
+```
 docker ps  # list the running container  
 docker ps -a  # list all containers  
 docker ps -q  # list the containers with only numeric ids  
 docker stop container\_id  # stops the container with indicated id  
 docker start container\_id  # starts the container with indicated id  
 docker rm container\_id  # delete the container with indicated id
+```
 
 #### Volumes
 
@@ -135,7 +141,7 @@ If you don't specify it will allow both write and read. If we create a folder or
 
 **Volumes Between Containers**
 
-docker run --name website-copy --volumes-from website -d -p 8081:80 nginx:latest
+`docker run --name website-copy --volumes-from website -d -p 8081:80 nginx:latest`
 
 #### Docker Specific Files
 
@@ -147,7 +153,7 @@ docker run --name website-copy --volumes-from website -d -p 8081:80 nginx:latest
 
 To create an image with a Dockerfile we simply run this command:
 
-docker build -t tag:version path\_of\_dockerfile
+`docker build -t tag:version path\_of\_dockerfile`
 
 **.dockerignore:** You have designed an app and coded it with your favorite programming language. Now you want to deploy it using Docker containerization technology. At the same time, you pushed your project to GitHub, thus your project folder contains some .git folders that are required for the GitHub repository. These types of folders or files are unnecessary for the deployment process. That’s why we do not want to include them in our Docker image. For this sake, we simply add the names of folders and files that we do not want to include into our Docker image to the .dockerignore file.
 
@@ -156,13 +162,20 @@ docker build -t tag:version path\_of\_dockerfile
 Let’s say you want to have a web app written with Python programming language using the Flask framework.
 
 ```
-$ cd /path/to/python-docker$ pip3 install Flask$ pip3 freeze > requirements.txt$ touch app.py
+cd /path/to/python-docker
+pip3 install Flask
+pip3 freeze > requirements.txt$ touch app.py
 ```
 
 After following the steps above, you have created a Python file and you are ready to write your code. In this article, for the sake of simplicity, we are going to write a few lines of code that make a simple web request, a Hello World web app. Now you can open your project file with your favorite IDE or text editor selection like VSCode or Sublime, etc., and put the code below inside the file.
 
 ```
-from flask import Flaskapp = Flask(__name__)@app.route('/')def hello_world():    return 'Hello, Docker!'
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, Docker!'
 ```
 
 You have tested the app by typing the run command `python3 -m flask run` . When you run this command it listed that the app is running on your local machine with a port number 5000. You tested and confirmed that the app is working properly as you desired by opening a new browser and navigate to `[http://localhost:5000](http://localhost:5000.)`[.](http://localhost:5000.)
@@ -172,7 +185,12 @@ Now you want to launch and serve this web app to users around the world. The tra
 Therefore you decided to deploy your app using much more modern technology i.e. Docker. Of course, there are more advanced ways of deploying apps using different stacks of technologies like Docker + Kubernetes + Jenkins CI/CD tools, etc. but these are not within the scope of this article and will not be covered here. Now your deployment technology is Docker and for deploying your web app using Docker, you will eventually need a Dockerfile which we discussed in earlier titles.
 
 ```
-FROM python:3.8-slim-busterWORKDIR /appCOPY requirements.txt requirements.txtRUN pip3 install -r requirements.txtCOPY . .CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+FROM python:3.8-slim-buster
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+COPY . .
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 ```
 
 You can now build your web app’s Docker image using the Dockerfile above and by typing the command `docker build -t python-docket:v0` . Afterward, you achieved a Docker image that wraps your web app and it is ready to deploy.
