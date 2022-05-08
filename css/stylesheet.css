@@ -1,0 +1,149 @@
+body {
+    font: 1rem/1.5 '-apple-system', BlinkMacSystemFont, avenir next, avenir, helvetica, helvetica neue, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 2rem;
+    color: #bd93f9;
+    background-color: black
+}
+
+header {
+    line-height: 2;
+    padding-bottom: 1.5rem
+}
+
+header {
+    line-height: 2;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem
+}
+
+header a {
+    text-decoration: none
+}
+
+header ul {
+    list-style-type: none;
+    padding: 0
+}
+
+header li,
+header a {
+    display: inline
+}
+
+header ul a:first-child {
+    padding-left: 1rem
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+strong,
+b {
+    font-size: inherit;
+    font-weight: 600
+}
+
+h2.post {
+    padding-top: .5rem
+}
+
+hr {
+    border: 0;
+    margin: 3rem 0
+}
+
+img {
+    max-width: 100%;
+    height: auto
+}
+
+
+a,
+a:visited {
+    color: inherit
+}
+
+a:hover,
+a.heading-link {
+    text-decoration: none
+}
+
+pre {
+    padding: .5rem;
+    overflow: auto;
+    overflow-x: scroll;
+    overflow-wrap: normal
+}
+
+code,
+pre {
+    font-family: San Francisco Mono, Monaco, consolas, lucida console, dejavu sans mono, bitstream vera sans mono, monospace;
+    font-size: normal;
+    font-size: small
+}
+
+code {
+    padding: 0;
+    border: none
+}
+
+ul {
+    list-style-type: square
+}
+
+ul,
+ol {
+    padding-left: 1.2rem
+}
+
+.content {
+    max-width: 70ch;
+    margin: 0 auto
+}
+
+.link {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-decoration: none
+}
+
+.list {
+    line-height: 2;
+    list-style-type: none;
+    padding-left: 0
+}
+
+.list li {
+    padding-bottom: .1rem
+}
+
+
+
+.list li {
+    display: flex;
+    align-items: baseline
+}
+
+.list li time {
+    flex: initial
+}
+
+.hr-list {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: .5rem;
+    margin-left: .5rem;
+    height: 1px;
+    border: 0;
+    border-bottom: 1px dotted #bd93f9;
+    flex: 1 0 1rem
+}
